@@ -1,6 +1,5 @@
 package ru.isands.elreg.model;
 
-import io.micrometer.core.instrument.util.StringUtils;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -36,4 +35,5 @@ public class Product {
     private boolean installment;                // Можно ли приобрести в рассрочку
 
     transient List<Model> availableModels;      // Модели в наличии
+
 }

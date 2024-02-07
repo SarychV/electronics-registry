@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -12,13 +13,14 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import ru.isands.elreg.exception.NotFoundException;
 
 @Slf4j
 @RestControllerAdvice
 public class ExceptionController {
     private static final DateTimeFormatter DATE_TIME_WHITESPACE = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-/*
+
     //Ошибочная обработка аргументов по аннотации @Valid
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -31,6 +33,17 @@ public class ExceptionController {
                 "timestamp", LocalDateTime.now().format(DATE_TIME_WHITESPACE));
     }
 
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleMethod(final HttpMessageNotReadableException e) {
+        log.warn(e.toString());
+        return Map.of(
+                "status", HttpStatus.BAD_REQUEST.name(),
+                "reason", "Incorrectly made request.",
+                "message", e.getMessage(),
+                "timestamp", LocalDateTime.now().format(DATE_TIME_WHITESPACE));
+    }
+    /*
     //Ошибочная обработка аргументов по аннотациям из пакета javax.validations при использовании @Valid
     // в параметрах контроллеров
     @ExceptionHandler
@@ -104,8 +117,9 @@ public class ExceptionController {
                 "message", e.getMessage(),
                 "timestamp", LocalDateTime.now().format(DATE_TIME_WHITESPACE));
     }
+*/
 
-    //Отсутствие объекта при удалении (пользователя, категории)
+    //Отсутствие объекта при удалении, обновлении
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public @ResponseBody Map<String, String> handleMethod(final NotFoundException e) {
@@ -117,8 +131,6 @@ public class ExceptionController {
                 "timestamp", LocalDateTime.now().format(DATE_TIME_WHITESPACE));
     }
 
-
- */
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Map<String, String> handleMethod(final Exception e) {

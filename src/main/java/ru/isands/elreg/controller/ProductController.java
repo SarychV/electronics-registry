@@ -7,7 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.isands.elreg.dto.ProductDtoIn;
-import ru.isands.elreg.dto.ProductDtoOut;
+import ru.isands.elreg.dto.ProductDtoUpdate;
+import ru.isands.elreg.model.Product;
 import ru.isands.elreg.service.ProductService;
 
 import java.util.List;
@@ -25,26 +26,26 @@ public class ProductController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductDtoOut createProduct(@RequestBody @Valid ProductDtoIn productDto) {
+    public Product createProduct(@RequestBody @Valid ProductDtoIn productDto) {
         log.info("productService.create() gets params: productDto={}", productDto);
         return productService.create(productDto);
     }
 
     @PatchMapping("/{productId}")
-    public ProductDtoOut updateProduct( @PathVariable @Positive Long productId,
-                                        @RequestBody @Valid ProductDtoIn productDto) {
+    public Product updateProduct( @PathVariable @Positive Long productId,
+                                        @RequestBody ProductDtoUpdate productDto) {
         log.info("productService.update() gets params: productId={}, productDto={}", productId, productDto);
         return productService.update(productId, productDto);
     }
 
     @GetMapping("/{productId}")
-    public ProductDtoOut getProduct(@PathVariable @Positive Long productId) {
+    public Product getProduct(@PathVariable @Positive Long productId) {
         log.info("productService.read() gets params: productId={}", productId);
         return productService.read(productId);
     }
 
     @GetMapping()
-    public List<ProductDtoOut> getProductList() {
+    public List<Product> getProductList() {
         log.info("productService.readAll() is invoked");
         return productService.readAll();
     }
