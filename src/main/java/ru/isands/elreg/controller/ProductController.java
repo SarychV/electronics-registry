@@ -34,7 +34,7 @@ public class ProductController {
 
     @PatchMapping("/{productId}")
     public Product updateProduct( @PathVariable @Positive Long productId,
-                                        @RequestBody ProductDtoUpdate productDto) {
+                                  @RequestBody @Valid ProductDtoUpdate productDto) {
         log.info("productService.update() gets params: productId={}, productDto={}", productId, productDto);
         return productService.update(productId, productDto);
     }

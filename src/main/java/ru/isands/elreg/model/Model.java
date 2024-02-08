@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @ToString
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "models")
-public abstract class Model {
+public abstract class Model implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;              // Уникальный идентификатор модели
@@ -41,4 +41,9 @@ public abstract class Model {
 
     @Column(name = "available")
     private Boolean available;      // Наличие товара
+
+    @Override
+    public Model clone() throws CloneNotSupportedException {
+        return (Model) super.clone();
+    }
 }

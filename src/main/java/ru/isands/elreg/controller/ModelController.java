@@ -35,7 +35,7 @@ public class ModelController {
 
     @PatchMapping("/{modelId}")
     public Model updateModel(@PathVariable @Positive Long modelId,
-                                  @RequestBody ModelDtoUpdate modelDto) {
+                             @RequestBody @Valid ModelDtoUpdate modelDto) {
         log.info("modelService.update() gets params: modelId={}, modelDto={}", modelId, modelDto);
         return modelService.update(modelId, modelDto);
     }
