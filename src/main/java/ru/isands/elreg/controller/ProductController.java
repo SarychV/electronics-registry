@@ -6,8 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.isands.elreg.dto.ProductDtoIn;
+import ru.isands.elreg.dto.ProductDtoCreate;
 import ru.isands.elreg.dto.ProductDtoUpdate;
+import ru.isands.elreg.model.Category;
 import ru.isands.elreg.model.Product;
 import ru.isands.elreg.service.ProductService;
 
@@ -26,7 +27,7 @@ public class ProductController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Product createProduct(@RequestBody @Valid ProductDtoIn productDto) {
+    public Product createProduct(@RequestBody @Valid ProductDtoCreate productDto) {
         log.info("productService.create() gets params: productDto={}", productDto);
         return productService.create(productDto);
     }
@@ -45,9 +46,10 @@ public class ProductController {
     }
 
     @GetMapping()
-    public List<Product> getProductList() {
+    public List<Product> getProductList(
+            @RequestParam(required = false) Category category) {
         log.info("productService.readAll() is invoked");
-        return productService.readAll();
+        return productService.readAll(category);
     }
 
     @DeleteMapping("/{productId}")

@@ -11,7 +11,7 @@ import ru.isands.elreg.model.Category;
 @Setter
 @Getter
 @ToString
-public class ProductDtoIn {
+public class ProductDtoCreate {
     @NotNull
     Category category;
 

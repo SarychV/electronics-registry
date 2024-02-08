@@ -1,11 +1,13 @@
 package ru.isands.elreg.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import ru.isands.elreg.dto.ProductDtoIn;
+import ru.isands.elreg.dto.ProductDtoCreate;
 import ru.isands.elreg.dto.ProductDtoUpdate;
 import ru.isands.elreg.exception.NotFoundException;
 import ru.isands.elreg.mapper.ProductMapper;
+import ru.isands.elreg.model.Category;
 import ru.isands.elreg.model.Product;
 import ru.isands.elreg.repository.ProductRepository;
 
@@ -22,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product create(ProductDtoIn productDto) {
+    public Product create(ProductDtoCreate productDto) {
         Product result;
         Product newProduct = ProductMapper.toProduct(productDto);
         log.info("productRepository.save() was invoked with newProduct={}", newProduct);
@@ -38,11 +40,13 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> product = productRepository.findById(productId);
 
         if (product.isEmpty()) {
+            log.info("ProductServiceImpl.read(). Product with id={} not found", productId);
             throw new NotFoundException(
-                    String.format("Can't read object. Product with id=%d is not in database", productId));
+                    String.format("Product with id=%d not found", productId));
         } else {
             result = product.get();
-            // TODO. Вставить модели для этого продукта
+            // TODO Вставить модели для этого продукта
+
             result.setAvailableModels(List.of());
             log.info("ProductServiceImpl.read() returned result={}", result);
             return result;
@@ -55,16 +59,17 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> oldProduct = productRepository.findById(productId);
 
         if (oldProduct.isEmpty()) {
+            log.info("ProductServiceImpl.update(). Product with id=%d not found in database");
             throw new NotFoundException(
-                    String.format("Can't update object. Product with id=%d is not in database", productId));
+                    String.format("Product with id=%d not found in database", productId));
         }
 
-        Product updatedProduct = ProductMapper.toUpdatedProduct(productId, productDto, oldProduct.get());
+        Product updatedProduct = ProductMapper.toProduct(productDto, oldProduct.get());
 
         log.info("productRepository.save() was invoked with updatedProduct={}", updatedProduct);
         result = productRepository.save(updatedProduct);
 
-        // TODO. Вставить модели для этого продукта
+        // TODO Вставить модели для этого продукта
         result.setAvailableModels(List.of());
 
         log.info("ProductServiceImpl.update() returned result={}", result);
@@ -75,19 +80,26 @@ public class ProductServiceImpl implements ProductService {
     public void delete(long productId) {
         if (productRepository.existsById(productId)) {
             productRepository.deleteById(productId);
-            log.info("productRepository.delete(). Product with id={} was deleted", productId);
+            log.info("ProductServiceImpl.delete(). Product with id={} was deleted", productId);
         } else {
-            log.info("productRepository.delete(). Product with id={} is not in database", productId);
+            log.info("ProductServiceImpl.delete(). Product with id={} not found", productId);
             throw new NotFoundException(
-                    String.format("Can't find object. Product with id=%d is not in database", productId));
+                    String.format("Product with id=%d not found", productId));
         }
     }
 
     @Override
-    public List<Product> readAll() {
-        List<Product> products = productRepository.findAll();
-        // TODO Встроить модели в список с продуктами
+    public List<Product> readAll(Category category) {
+        List<Product> products;
 
+        Sort sort = Sort.by("category", "producer", "name");
+
+        if (category == null) {
+            products = productRepository.findAll(sort);
+        } else {
+            products = productRepository.findAllByCategory(category, sort);
+        }
+        // TODO Встроить модели в список с продуктами
         log.info("ProductServiceImpl.readAll() returned result={}", products);
         return products;
     }

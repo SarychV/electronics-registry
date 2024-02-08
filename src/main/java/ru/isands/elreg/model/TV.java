@@ -14,13 +14,14 @@ import lombok.Setter;
 @Entity
 @Table(name = "tvs")
 public class TV extends Model {
-    private String category;        // Категория телевизора
+    @Column(name = "category")
+    private String tvCategory;      // Категория телевизора
 
     private String technology;      // Технология
 
     @Override
     public String toString() {
-        return "TV(" + super.toString() + String.format(", category=%s, technology=%s)", category, technology);
+        return "TV(" + super.toString() + String.format(", tvCategory=%s, technology=%s)", tvCategory, technology);
     }
 }
 

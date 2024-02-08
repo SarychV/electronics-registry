@@ -1,13 +1,14 @@
 package ru.isands.elreg.service;
 
-import ru.isands.elreg.dto.ProductDtoIn;
+import ru.isands.elreg.dto.ProductDtoCreate;
 import ru.isands.elreg.dto.ProductDtoUpdate;
+import ru.isands.elreg.model.Category;
 import ru.isands.elreg.model.Product;
 
 import java.util.List;
 
 public interface ProductService {
-    Product create(ProductDtoIn prodDto);
+    Product create(ProductDtoCreate prodDto);
 
     Product read(long productId);
 
@@ -15,5 +16,5 @@ public interface ProductService {
 
     void delete(long productId);
 
-    List<Product> readAll();
+    List<Product> readAll(Category category);
 }

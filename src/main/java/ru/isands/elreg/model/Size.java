@@ -1,8 +1,12 @@
 package ru.isands.elreg.model;
 
 import jakarta.persistence.Embeddable;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
+@Setter
+@Getter
 @ToString
 @Embeddable
 public class Size {

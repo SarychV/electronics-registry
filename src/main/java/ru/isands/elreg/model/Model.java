@@ -1,7 +1,6 @@
 package ru.isands.elreg.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,6 +24,10 @@ public abstract class Model {
     @Column(name = "product_id")
     protected long productId;       // Уникальный идентификатор продукта, к которому относится модель
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "product_category")
+    protected Category productCategory;     // Категория изделия (телевизор, холодильник, пылесос и т.д.)
+
     private String name;            // Наименование
 
     @Column(name = "ser_num")
@@ -37,5 +40,5 @@ public abstract class Model {
     private BigDecimal price;       // Цена
 
     @Column(name = "available")
-    private boolean isAvailable;    // Наличие товара
+    private Boolean available;      // Наличие товара
 }

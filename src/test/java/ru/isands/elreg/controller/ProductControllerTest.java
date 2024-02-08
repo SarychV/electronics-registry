@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.isands.elreg.dto.ProductDtoIn;
+import ru.isands.elreg.dto.ProductDtoCreate;
 import ru.isands.elreg.model.Category;
 import ru.isands.elreg.model.Product;
 import ru.isands.elreg.service.ProductServiceImpl;
@@ -33,7 +33,7 @@ class ProductControllerTest {
     @Autowired
     MockMvc mvc;
 
-    ProductDtoIn productDto = new ProductDtoIn();
+    ProductDtoCreate productDto = new ProductDtoCreate();
     Product product = new Product();
 
     @BeforeEach
@@ -57,7 +57,7 @@ class ProductControllerTest {
 
     @Test
     void whenCreateProduct_thenIsOk() throws Exception {
-        Mockito.when(service.create(any(ProductDtoIn.class)))
+        Mockito.when(service.create(any(ProductDtoCreate.class)))
                 .thenReturn(product);
 
         mvc.perform(post("/products")

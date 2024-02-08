@@ -9,11 +9,13 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-//import javax.validation.ConstraintViolationException;
+import jakarta.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import ru.isands.elreg.exception.NotFoundException;
+import ru.isands.elreg.exception.BadRequestException;
+import ru.isands.elreg.exception.BadConditionException;
 
 @Slf4j
 @RestControllerAdvice
@@ -43,8 +45,8 @@ public class ExceptionController {
                 "message", e.getMessage(),
                 "timestamp", LocalDateTime.now().format(DATE_TIME_WHITESPACE));
     }
-    /*
-    //Ошибочная обработка аргументов по аннотациям из пакета javax.validations при использовании @Valid
+
+    //Ошибочная обработка аргументов по аннотациям при использовании @Valid
     // в параметрах контроллеров
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -117,7 +119,6 @@ public class ExceptionController {
                 "message", e.getMessage(),
                 "timestamp", LocalDateTime.now().format(DATE_TIME_WHITESPACE));
     }
-*/
 
     //Отсутствие объекта при удалении, обновлении
     @ExceptionHandler

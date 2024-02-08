@@ -43,8 +43,6 @@ class ProductRepositoryTest {
     }
 
     @Test
-    // @Commit and @Rollback
-    // @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public void whenSaveTV_thenGetItById() {
         Product prod = generateProduct(Category.TV, "TV_prod: ");
         Product saved;
@@ -66,8 +64,6 @@ class ProductRepositoryTest {
     }
 
     @Test
-    // @Commit and @Rollback
-    // @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public void whenSaveCleaner_thenGetItById() {
         Product prod = generateProduct(Category.CLEANER, "CLN: ");
         Product saved;
@@ -89,8 +85,6 @@ class ProductRepositoryTest {
     }
 
     @Test
-    // @Commit and @Rollback
-    // @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public void whenSaveComputer_thenGetItById() {
         Product prod = generateProduct(Category.COMPUTER, "COMP: ");
         Product saved;
@@ -112,8 +106,6 @@ class ProductRepositoryTest {
     }
 
     @Test
-    // @Commit and @Rollback
-    // @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public void whenSaveFridge_thenGetItById() {
         Product prod = generateProduct(Category.FRIDGE, "FRG: ");
         Product saved;
@@ -135,8 +127,6 @@ class ProductRepositoryTest {
     }
 
     @Test
-    // @Commit and @Rollback
-    // @Transactional(propagation = Propagation.NOT_SUPPORTED)
     public void whenSavePhone_thenGetItById() {
         Product prod = generateProduct(Category.PHONE, "PHN: ");
         Product saved;
@@ -169,13 +159,14 @@ class ProductRepositoryTest {
     TV generateTV(long productId, String prefix) {
         TV tv = new TV();
         tv.setProductId(productId);
+        tv.setProductCategory(Category.TV);
         tv.setName(prefix + "Name");
         tv.setSerialNumber(prefix + "012");
         tv.setColour("Black");
         tv.setSize(new Size());
         tv.setPrice(new BigDecimal("1234.345"));
         tv.setAvailable(true);
-        tv.setCategory(prefix + "unknown");
+        tv.setTvCategory(prefix + "unknown");
         tv.setTechnology(prefix + "IPS");
         return tv;
     }
@@ -183,6 +174,7 @@ class ProductRepositoryTest {
     Cleaner generateCleaner(long productId, String prefix) {
         Cleaner model = new Cleaner();
         model.setProductId(productId);
+        model.setProductCategory(Category.CLEANER);
         model.setName(prefix + "Name");
         model.setSerialNumber(prefix + "012");
         model.setColour("Black");
@@ -197,13 +189,14 @@ class ProductRepositoryTest {
     Computer generateComputer(long productId, String prefix) {
         Computer model = new Computer();
         model.setProductId(productId);
+        model.setProductCategory(Category.COMPUTER);
         model.setName(prefix + "Name");
         model.setSerialNumber(prefix + "012");
         model.setColour("Black");
         model.setSize(new Size());
         model.setPrice(new BigDecimal("1234.345"));
         model.setAvailable(true);
-        model.setCategory(prefix + "Category");
+        model.setComputerCategory(prefix + "Category");
         model.setProcessorType(prefix + "Processor Type");
         return model;
     }
@@ -211,6 +204,7 @@ class ProductRepositoryTest {
     Fridge generateFridge(long productId, String prefix) {
         Fridge model = new Fridge();
         model.setProductId(productId);
+        model.setProductCategory(Category.FRIDGE);
         model.setName(prefix + "Name");
         model.setSerialNumber(prefix + "012");
         model.setColour("Silver");
@@ -225,6 +219,7 @@ class ProductRepositoryTest {
     Phone generatePhone(long productId, String prefix) {
         Phone model = new Phone();
         model.setProductId(productId);
+        model.setProductCategory(Category.PHONE);
         model.setName(prefix + "Name");
         model.setSerialNumber(prefix + "012");
         model.setColour("Silver");

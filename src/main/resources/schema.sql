@@ -11,15 +11,17 @@ CREATE TABLE IF NOT EXISTS products (
 
 CREATE TABLE IF NOT EXISTS models (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    product_id BIGINT REFERENCES products(id),
+    product_id BIGINT REFERENCES products(id) ON DELETE CASCADE,
+    product_category VARCHAR(10) NOT NULL,
     name VARCHAR(100) NOT NULL,
-    ser_num VARCHAR(10),
+    ser_num VARCHAR(10) NOT NULL,
     colour VARCHAR(15),
     length INTEGER DEFAULT 0,
     width INTEGER DEFAULT 0,
     height INTEGER DEFAULT 0,
     price NUMERIC(10,2),
-    available BOOLEAN DEFAULT FALSE
+    available BOOLEAN DEFAULT FALSE,
+    UNIQUE(name, ser_num)
 );
 
 CREATE TABLE IF NOT EXISTS tvs (

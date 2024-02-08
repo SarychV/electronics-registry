@@ -21,7 +21,8 @@ public class Computer extends Model {
     Consumer PC (массовый ПК); Office PC (деловой ПК); Mobile PC (портативный ПК);
     Workstation PC (рабочая станция); Entertainment PC (развлекательный ПК)
      */
-    private String category;           // Категория компьютера
+    @Column(name = "category")
+    private String computerCategory;           // Категория компьютера
 
     @Column(name = "processor_type")
     private String processorType;      // Тип процессора
@@ -29,6 +30,6 @@ public class Computer extends Model {
     @Override
     public String toString() {
         return "Computer(" + super.toString() +
-                String.format(", category=%s, processorType=%s)", category, processorType);
+                String.format(", computerCategory=%s, processorType=%s)", computerCategory, processorType);
     }
 }
