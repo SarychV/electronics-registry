@@ -8,19 +8,27 @@ import ru.isands.elreg.dto.ProductDtoUpdate;
 import ru.isands.elreg.exception.NotFoundException;
 import ru.isands.elreg.mapper.ProductMapper;
 import ru.isands.elreg.model.Category;
+import ru.isands.elreg.model.Model;
 import ru.isands.elreg.model.Product;
+import ru.isands.elreg.repository.ModelRepository;
 import ru.isands.elreg.repository.ProductRepository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final ModelRepository modelRepository;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository,
+                              ModelRepository modelRepository) {
         this.productRepository = productRepository;
+        this.modelRepository = modelRepository;
     }
 
     @Override
@@ -45,9 +53,10 @@ public class ProductServiceImpl implements ProductService {
                     String.format("Product with id=%d not found", productId));
         } else {
             result = product.get();
-            // TODO Вставить модели для этого продукта
 
-            result.setAvailableModels(List.of());
+            // Вставить модели для этого продукта
+            result = injectModelsToProducts(List.of(result)).get(0);
+
             log.info("ProductServiceImpl.read() returned result={}", result);
             return result;
         }
@@ -69,8 +78,8 @@ public class ProductServiceImpl implements ProductService {
         log.info("productRepository.save() was invoked with updatedProduct={}", updatedProduct);
         result = productRepository.save(updatedProduct);
 
-        // TODO Вставить модели для этого продукта
-        result.setAvailableModels(List.of());
+        // Вставить модели для этого продукта
+        result = injectModelsToProducts(List.of(result)).get(0);
 
         log.info("ProductServiceImpl.update() returned result={}", result);
         return result;
@@ -99,8 +108,58 @@ public class ProductServiceImpl implements ProductService {
         } else {
             products = productRepository.findAllByCategory(category, sort);
         }
-        // TODO Встроить модели в список с продуктами
+        // Встроить модели в список с продуктами
+        products = injectModelsToProducts(products);
+
         log.info("ProductServiceImpl.readAll() returned result={}", products);
         return products;
     }
+
+    List<Product> injectModelsToProducts(List<Product> products) {
+        // Получить список идентификаторов продуктов
+        List<Long> productIndexes = products
+                .stream()
+                .map(Product::getId)
+                .collect(Collectors.toList());
+        // Задать сортировку по цене
+        Sort sort = Sort.by(Sort.Direction.DESC, "price");
+        // Получить модели, у которых productId из полученного выше списка
+        List<Model> models = modelRepository.findAllByProductIdIn(productIndexes, sort);
+
+        // Сгруппировать модели по productId
+        HashMap<Long, List<Model>> groupedModels = groupModelsByProductId(models);
+
+        // Связать продукты и списки моделей
+        products = bindProductsWithModels(products, groupedModels);
+        return products;
+    }
+
+    HashMap<Long, List<Model>> groupModelsByProductId(List<Model> models) {
+        HashMap<Long, List<Model>> result = new HashMap<>();  // productId -> List<Model>
+        for (Model model: models) {
+            List<Model> listInGroup = result.get(model.getProductId());
+
+            if (listInGroup != null) {
+                listInGroup.add(model);
+            } else {
+                result.put(model.getProductId(), new ArrayList<Model>(List.of(model)));
+            }
+        }
+        return result;
+    }
+
+    List<Product> bindProductsWithModels(List<Product> products, HashMap<Long, List<Model>> models) {
+        return products.stream()
+                .peek(product -> {
+                    long id = product.getId();
+                    List<Model> modelList = models.get(id);
+
+                    // Если для продукта отсутствует перечень моделей, присвоить продукту пустой перечень моделей
+                    if (modelList == null) modelList = new ArrayList<>();
+                    product.setAvailableModels(modelList);
+                })
+                .collect(Collectors.toList());
+    }
 }
+
+

@@ -30,8 +30,10 @@ public class ProductMapper {
 
         if (dto.getProducer() == null) result.setProducer(saved.getProducer());
             else result.setProducer(dto.getProducer());
+
+        result.setCategory(saved.getCategory());
 /*
-        // Код необходим в случае реализации обновления категории. См. ProductDtoUpdate.java
+        // Код необходим в случае реализации обновления категории. См. ProductDtoUpdate.java - вместо строки выше
         if (dto.getCategory() == null) result.setCategory(saved.getCategory());
             else result.setCategory(dto.getCategory());
 */
