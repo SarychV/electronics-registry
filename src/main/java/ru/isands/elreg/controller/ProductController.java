@@ -12,6 +12,7 @@ import ru.isands.elreg.model.Category;
 import ru.isands.elreg.model.Product;
 import ru.isands.elreg.service.ProductService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -57,5 +58,42 @@ public class ProductController {
     public void deleteProduct(@PathVariable @Positive Long productId) {
         log.info("productService.delete() gets params: productId={}", productId);
         productService.delete(productId);
+    }
+
+    @GetMapping("/search")
+    public List<Product> getSearch(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) List<Category> category,
+            @RequestParam(required = false) String colour,
+            @RequestParam(required = false, name = "price_from") BigDecimal priceFrom,
+            @RequestParam(required = false, name = "price_to") BigDecimal priceTo,
+            @RequestParam(required = false, name = "tv_category") String tvCategory,
+            @RequestParam(required = false, name = "tv_technology") String tvTechnology,
+            @RequestParam(required = false, name = "cln_v_from") Integer clnVFrom,
+            @RequestParam(required = false, name = "cln_v_to") Integer clnVTo,
+            @RequestParam(required = false, name = "cln_modes_from") Integer clnModesFrom,
+            @RequestParam(required = false, name = "cln_modes_to") Integer clnModesTo,
+            @RequestParam(required = false, name = "frg_doors_from") Integer frgDoorsFrom,
+            @RequestParam(required = false, name = "frg_doors_to") Integer frgDoorsTo,
+            @RequestParam(required = false, name = "frg_compressor") String frgCompressorType,
+            @RequestParam(required = false, name = "phn_mem_from")  Integer phnMemFrom,
+            @RequestParam(required = false, name = "phn_mem_to") Integer phnMemTo,
+            @RequestParam(required = false, name = "phn_cam_from") Integer phnCamFrom,
+            @RequestParam(required = false, name = "phn_cam_to") Integer phnCamTo,
+            @RequestParam(required = false, name = "comp_category") String computerCategory,
+            @RequestParam(required = false, name = "comp_proc") String computerProcType
+            ) {
+        log.info("searchService.search() gets params: name={}, categories={}, colour={}, " +
+                "priceFrom={}, priceTo={}, tvCategory={}, tvTechnology={}, clnVFrom={}, " +
+                "clnVTo={}, clnModesFrom={}, clnModesTo={}, frgDoorsFrom={}, frgDoorsTo={}, " +
+                "frgCompressorType={}, phnMemFrom={}, phnMemTo={}, phnCamFrom={}, phnCamTo={}, " +
+                "computerCategory={}, computerProcType={}",
+                name, category, colour, priceFrom, priceTo, tvCategory, tvTechnology, clnVFrom,
+                clnVTo, clnModesFrom, clnModesTo, frgDoorsFrom, frgDoorsTo, frgCompressorType, phnMemFrom,
+                phnMemTo, phnCamFrom, phnCamTo, computerCategory, computerProcType);
+
+        return productService.search(name, category, colour, priceFrom, priceTo, tvCategory,
+                tvTechnology, clnVFrom, clnVTo, clnModesFrom, clnModesTo, frgDoorsFrom, frgDoorsTo,
+                frgCompressorType, phnMemFrom, phnMemTo, phnCamFrom, phnCamTo, computerCategory, computerProcType);
     }
 }

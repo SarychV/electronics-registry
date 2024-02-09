@@ -9,10 +9,12 @@ import ru.isands.elreg.exception.NotFoundException;
 import ru.isands.elreg.mapper.ProductMapper;
 import ru.isands.elreg.model.Category;
 import ru.isands.elreg.model.Model;
+import ru.isands.elreg.model.Pair;
 import ru.isands.elreg.model.Product;
 import ru.isands.elreg.repository.ModelRepository;
 import ru.isands.elreg.repository.ProductRepository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -115,6 +117,30 @@ public class ProductServiceImpl implements ProductService {
         return products;
     }
 
+    @Override
+    public List<Product> search(String name, List<Category> categories, String colour, BigDecimal priceFrom,
+                         BigDecimal priceTo, String tvCategory, String tvTechnology, Integer clnVFrom, Integer clnVTo,
+                         Integer clnModesFrom, Integer clnModesTo, Integer frgDoorsFrom, Integer frgDoorsTo,
+                         String frgCompressorType, Integer phnMemFrom, Integer phnMemTo, Integer phnCamFrom,
+                         Integer phnCamTo, String computerCategory, String computerProcType) {
+        List<Product> products;
+        List<Model> models;
+        HashMap<Long, List<Model>> groupedModels;
+        List<Pair> pairs;
+        pairs = productRepository.search(name, categories, colour, priceFrom, priceTo, tvCategory,
+                tvTechnology, clnVFrom, clnVTo, clnModesFrom, clnModesTo, frgDoorsFrom, frgDoorsTo,
+                frgCompressorType, phnMemFrom, phnMemTo, phnCamFrom, phnCamTo, computerCategory, computerProcType);
+        List<Long> productIndexes = getProductIndexes(pairs);
+        List<Long> modelIndexes = getModelIndexes(pairs);
+
+        products = productRepository.findAllById(productIndexes);
+        models = modelRepository.findAllById(modelIndexes);
+        groupedModels = groupModelsByProductId(models);
+        products = bindProductsWithModels(products, groupedModels);
+
+        return products;
+    }
+
     List<Product> injectModelsToProducts(List<Product> products) {
         // Получить список идентификаторов продуктов
         List<Long> productIndexes = products
@@ -159,6 +185,14 @@ public class ProductServiceImpl implements ProductService {
                     product.setAvailableModels(modelList);
                 })
                 .collect(Collectors.toList());
+    }
+
+    List<Long> getProductIndexes(List<Pair> pairs) {
+        return pairs.stream().map(Pair::getProductId).collect(Collectors.toList());
+    }
+
+    List<Long> getModelIndexes(List<Pair> pairs) {
+        return pairs.stream().map(Pair::getModelId).collect(Collectors.toList());
     }
 }
 
