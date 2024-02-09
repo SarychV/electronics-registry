@@ -1,18 +1,24 @@
 package ru.isands.elreg.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+
+@Schema(description = "Габаритные размеры технического средства")
 @Setter
 @Getter
 @ToString
 @Embeddable
 public class Size {
-    private int length;     // Длина в милиметрах
+    @Schema(description = "Длина в милиметрах")
+    private int length;
 
-    private int width;      // Ширина в милиметрах
+    @Schema(description = "Ширина в милиметрах")
+    private int width;
 
-    private int height;     // Высота в милиметрах
+    @Schema(description = "Высота в милиметрах")
+    private int height;
 }

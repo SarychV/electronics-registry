@@ -1,0 +1,1083 @@
+{
+	"info": {
+		"_postman_id": "e4d45cce-9f02-4d85-bd2c-6c9612549668",
+		"name": "electronics-registry",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28550855"
+	},
+	"item": [
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "validation",
+					"item": [
+						{
+							"name": "Запрос без имени",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"TV\",\n    \"country\":\"Japan\",\n    \"producer\":\"Sony\",\n    \"onlineOrdering\": true,\n    \"installment\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/products"
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос с name<2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"TV\",\n    \"name\":\"B\",\n    \"country\":\"Japan\",\n    \"producer\":\"Sony\",\n    \"onlineOrdering\":true,\n    \"installment\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/products"
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос c name>100",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"TV\",\n    \"name\":\"0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-\",\n    \"country\":\"Japan\",\n    \"producer\":\"Sony\",\n    \"onlineOrdering\":true,\n    \"installment\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/products"
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос без country",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"TV\",\n    \"name\":\"Bravia\",\n    \"producer\":\"Sony\",\n    \"onlineOrdering\":true,\n    \"installment\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/products"
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос c country<2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"TV\",\n    \"name\":\"Bravia\",\n    \"country\":\"J\",\n    \"producer\":\"Sony\",\n    \"onlineOrdering\":true,\n    \"installment\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/products"
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос c country>50",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"TV\",\n    \"name\":\"Bravia\",\n    \"country\":\"0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-\",\n    \"producer\":\"Sony\",\n    \"onlineOrdering\":true,\n    \"installment\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/products"
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос без producer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"TV\",\n    \"name\":\"Bravia\",\n    \"country\":\"Japan\",\n    \"onlineOrdering\":true,\n    \"installment\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/products"
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос c producer>50",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"TV\",\n    \"name\":\"Bravia\",\n    \"country\":\"Japan\",\n    \"producer\":\"0123456789-0123456789-0123456789-0123456789-0123456789-0123456789-\",\n    \"onlineOrdering\":true,\n    \"installment\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/products"
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос с некорректным логическим значением",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"TV\",\n    \"name\":\"Bravia\",\n    \"country\":\"Japan\",\n    \"producer\":\"Sony\",\n    \"onlineOrdering\":\"ok\",\n    \"installment\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/products"
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос без category",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Bravia\",\n    \"country\":\"Japan\",\n    \"producer\":\"Sony\",\n    \"onlineOrdering\":false,\n    \"installment\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/products"
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос с некорректным  category",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\":\"Bad\",\n    \"name\":\"Bravia\",\n    \"country\":\"Japan\",\n    \"producer\":\"Sony\",\n    \"onlineOrdering\":false,\n    \"installment\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/products"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Создать продукт Bravia",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category\":\"TV\",\n    \"name\":\"Bravia\",\n    \"country\":\"Japan\",\n    \"producer\":\"Sony\",\n    \"onlineOrdering\": true,\n    \"installment\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Создать продукт Бирюса",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category\":\"FRIDGE\",\n    \"name\":\"Бирюса\",\n    \"country\":\"Russia\",\n    \"producer\":\"ТяжМаш\",\n    \"onlineOrdering\": false,\n    \"installment\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Чтение продукта с prodId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/products/:prodId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								":prodId"
+							],
+							"variable": [
+								{
+									"key": "prodId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Чтение списка продуктов",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/products"
+					},
+					"response": []
+				},
+				{
+					"name": "Изменение страны Бирюсы",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"country\":\"China\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/products/:prodId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								":prodId"
+							],
+							"variable": [
+								{
+									"key": "prodId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменение у Бирюсы onlineOrdering",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"onlineOrdering\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/products/:prodId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								":prodId"
+							],
+							"variable": [
+								{
+									"key": "prodId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменение продукта с некорректным productId",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"onlineOrdering\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/products/:prodId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"products",
+								":prodId"
+							],
+							"variable": [
+								{
+									"key": "prodId",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "models",
+			"item": [
+				{
+					"name": "validation",
+					"item": [
+						{
+							"name": "Минимальные атрибуты TV",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\":\"1\",\n    \"name\":\"Bravia MX-236\",\n    \"serialNumber\":\"87X-1234\",\n    \"colour\":\"Black\",\n    \"length\":500,\n    \"width\":100,\n    \"height\":400,\n    \"price\":\"5000.52\",\n    \"available\": true,\n    \"tvCategory\":\"unknown\",\n    \"technology\":\"IPS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/models"
+							},
+							"response": []
+						},
+						{
+							"name": "Телевизор с отрицательным размером",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\":\"1\",\n    \"name\":\"Bravia MX-4\",\n    \"serialNumber\":\"87X-test\",\n    \"colour\":\"Black\",\n    \"length\":-10,\n    \"width\":100,\n    \"height\":400\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/models"
+							},
+							"response": []
+						},
+						{
+							"name": "Телевизор с отрицательной ценой",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"productId\":\"1\",\n    \"name\":\"Bravia MX-5\",\n    \"serialNumber\":\"87X-test\",\n    \"colour\":\"Black\",\n    \"length\":500,\n    \"width\":100,\n    \"height\":400,\n    \"price\":-5000.52,\n    \"available\": true,\n    \"tvCategory\":\"unknown\",\n    \"technology\":\"IPS\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseURL}}/models"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Модель телевизора 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\":\"1\",\n    \"name\":\"Bravia MX-236\",\n    \"serialNumber\":\"87X-1234\",\n    \"colour\":\"Black\",\n    \"length\":500,\n    \"width\":100,\n    \"height\":400,\n    \"price\":\"5000.52\",\n    \"available\": true,\n    \"tvCategory\":\"unknown\",\n    \"technology\":\"IPS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/models"
+					},
+					"response": []
+				},
+				{
+					"name": "Модель телевизора 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\":\"1\",\n    \"name\":\"Bravia MX-240\",\n    \"serialNumber\":\"87X-1234\",\n    \"colour\":\"Black\",\n    \"length\":500,\n    \"width\":100,\n    \"height\":400,\n    \"price\":\"4000.52\",\n    \"available\": true,\n    \"tvCategory\":\"unknown\",\n    \"technology\":\"IPS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/models"
+					},
+					"response": []
+				},
+				{
+					"name": "Модель холодильника",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\":\"2\",\n    \"name\":\"Biryusa B-3\",\n    \"serialNumber\":\"b32-3945\",\n    \"colour\":\"Silver\",\n    \"length\":600,\n    \"width\":540,\n    \"height\":1400,\n    \"price\":\"40000\",\n    \"available\": true,\n    \"numDoors\":1,\n    \"compressorType\":\"frion\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/models"
+					},
+					"response": []
+				},
+				{
+					"name": "Холодильник 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\":\"2\",\n    \"name\":\"Biryusa B-8\",\n    \"serialNumber\":\"b88-7999\",\n    \"colour\":\"White\",\n    \"length\":600,\n    \"width\":540,\n    \"height\":2000,\n    \"price\":\"70000\",\n    \"available\": true,\n    \"numDoors\":2,\n    \"compressorType\":\"argon\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/models"
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление холодильника по id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/models/:modelId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"models",
+								":modelId"
+							],
+							"variable": [
+								{
+									"key": "modelId",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить модель телевизора по id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/models/:modelId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"models",
+								":modelId"
+							],
+							"variable": [
+								{
+									"key": "modelId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить все модели изделий",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/models"
+					},
+					"response": []
+				},
+				{
+					"name": "Получить все модели телевизоров",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/models?category=TV",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"models"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "TV"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "search",
+			"item": [
+				{
+					"name": "Поиск продуктов",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseURL}}/products/search"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Инициализация базы данных",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/products/init"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

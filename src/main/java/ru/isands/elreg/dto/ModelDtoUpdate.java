@@ -1,5 +1,6 @@
 package ru.isands.elreg.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,65 +13,83 @@ import java.math.BigDecimal;
 @ToString
 public class ModelDtoUpdate {
     @Size(max = 100)
-    private String name;                    // Наименование
+    @Schema(description = "Наименование")
+    private String name;
 
     @Size(max = 10)
-    private String serialNumber;            // Серийный номер
+    @Schema(description = "Серийный номер")
+    private String serialNumber;
 
     @Size(max = 15)
-    private String colour;                  // Цвет
+    @Schema(description = "Цвет")
+    private String colour;
 
     @PositiveOrZero
-    private Integer length = 0;             // Длина в милиметрах
+    @Schema(description = "Длина в милиметрах")
+    private Integer length = 0;
 
     @PositiveOrZero
-    private Integer width = 0;              // Ширина в милиметрах
+    @Schema(description = "Ширина в милиметрах")
+    private Integer width = 0;
 
     @PositiveOrZero
-    private Integer height = 0;             // Высота в милиметрах
+    @Schema(description = "Высота в милиметрах")
+    private Integer height = 0;
 
     @PositiveOrZero
-    private BigDecimal price;               // Цена
+    @Schema(description = "Цена")
+    private BigDecimal price;
 
-    private Boolean available;              // Наличие товара
+    @Schema(description = "Наличие товара")
+    private Boolean available;
 
 
     // Параметры для категории TV
     @Size(max = 50)
-    private String tvCategory;              // Категория телевизора
+    @Schema(description = "Категория телевизора")
+    private String tvCategory;
 
     @Size(max = 20)
-    private String technology;              // Технология
+    @Schema(description = "Технология")
+    private String technology;
 
 
     // Параметры для категории CLEANER
     @Positive
-    private Integer containerVolume;        // Объем контейнера в милилитрах
+    @Schema(description = "Объем контейнера в милилитрах")
+    private Integer containerVolume;
 
     @Positive
-    private Integer numModes;               // Количество режимов
+    @Schema(description = "Количество режимов")
+    private Integer numModes;
 
 
     // Параметры для категории COMPUTER
     @Size(max = 30)
-    private String computerCategory;        // Категория компьютера
+    @Schema(description = "Категория компьютера")
+    private String computerCategory;
 
     @Size(max = 30)
-    private String processorType;           // Тип процессора
+    @Schema(description = "Тип процессора")
+    private String processorType;
 
 
     // Параметры для категории FRIDGE
     @Positive
-    private Integer numDoors;               // Количество дверей
+    @Schema(description = "Количество дверей")
+    private Integer numDoors;
 
     @Size(max = 30)
-    private String compressorType;          // Тип компрессора
+    @Schema(description = "Тип компрессора")
+    private String compressorType;
 
 
     // Параметры для категории PHONE
     @Positive
-    private Integer memory;                 // Количество памяти в мегабайтах
+    @Schema(description = "Количество памяти в мегабайтах")
+    private Integer memory;
 
     @Positive
-    private Integer numCameras;             // Количество камер
+    @Schema(description = "Количество камер")
+    private Integer numCameras;
 }

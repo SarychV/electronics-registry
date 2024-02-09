@@ -1,10 +1,10 @@
 package ru.isands.elreg.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.isands.elreg.model.Category;
 
 @Setter
 @Getter
@@ -20,14 +20,20 @@ public class ProductDtoUpdate {
     // TODO Релизовать проверку наличия моделей у продукта. В случае остутствия, провести смену категории.
 
     @Size(min = 2, max = 100)
+    @Schema(description = "Наименование")
     String name;
 
     @Size(min = 2, max = 50)
+    @Schema(description = "Страна производитель")
     String country;
 
     @Size(max = 50)
+    @Schema(description = "Фирма производитель")
     String producer;
 
+    @Schema(description = "Существует ли возможность заказать онлайн")
     Boolean onlineOrdering;
+
+    @Schema(description = "Можно ли приобрести в рассрочку")
     Boolean installment;
 }

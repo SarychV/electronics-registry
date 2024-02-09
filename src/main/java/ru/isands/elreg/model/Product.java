@@ -1,5 +1,6 @@
 package ru.isands.elreg.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +11,8 @@ import java.util.List;
     к какой категории относится техника (например: телевизоры, холодильники, смартфоны и др.),
     есть ли возможность заказать онлайн, приобрести в рассрочку, об имеющихся в наличии моделях.
  */
+
+@Schema(description = "Информация о линейке ТС")
 @Getter
 @Setter
 @ToString
@@ -18,22 +21,30 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;                    // Идентификатор линейки технических средств
-    // Линейка может быть представлена несколькими моделями
+    @Schema(description = "Идентификатор линейки ТС. Линейка может быть представлена несколькими моделями")
+    private long id;
+
+    @Schema(description = "Категория техники")
     @Enumerated(EnumType.STRING)
-    private Category category;          // Категория техники
+    private Category category;
 
-    private String name;                // Наименование
+    @Schema(description = "Наименование")
+    private String name;
 
-    private String country;             // Страна производитель
+    @Schema(description = "Страна производитель")
+    private String country;
 
-    private String producer;            // Фирма производитель
+    @Schema(description = "Фирма производитель")
+    private String producer;
 
+    @Schema(description = "Существует ли возможность заказать онлайн")
     @Column(name = "online_ordering")
-    private boolean onlineOrdering;             // Существует ли возможность заказать онлайн
+    private boolean onlineOrdering;
 
-    private boolean installment;                // Можно ли приобрести в рассрочку
+    @Schema(description = "Можно ли приобрести в рассрочку")
+    private boolean installment;
 
-    transient List<Model> availableModels;      // Модели в наличии
+    @Schema(description = "Модели в наличии")
+    transient List<Model> availableModels;
 
 }

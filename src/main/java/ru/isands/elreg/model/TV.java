@@ -1,5 +1,6 @@
 package ru.isands.elreg.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,15 +10,18 @@ import lombok.Setter;
     Наследует поля класса Model, определяет специфичные атрибуты телевизоров.
  */
 
+@Schema(description = "Дополнительные параметры для телевизоров")
 @Setter
 @Getter
 @Entity
 @Table(name = "tvs")
 public class TV extends Model {
+    @Schema(description = "Категория телевизора")
     @Column(name = "category")
-    private String tvCategory;      // Категория телевизора
+    private String tvCategory;
 
-    private String technology;      // Технология
+    @Schema(description = "Технология")
+    private String technology;
 
     @Override
     public String toString() {

@@ -1,5 +1,6 @@
 package ru.isands.elreg.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,8 @@ import java.math.BigDecimal;
 /*
     Общие сведения о модели
  */
+
+@Schema(description = "Информация о модели ТС")
 @Entity
 @Setter
 @Getter
@@ -19,28 +22,37 @@ import java.math.BigDecimal;
 public abstract class Model implements Cloneable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected long id;              // Уникальный идентификатор модели
+    @Schema(description = "Уникальный идентификатор модели")
+    protected long id;
 
+    @Schema(description = "Уникальный идентификатор продукта, к которому относится модель")
     @Column(name = "product_id")
-    protected long productId;       // Уникальный идентификатор продукта, к которому относится модель
+    protected long productId;
 
+    @Schema(description = "Категория изделия (телевизор, холодильник, пылесос и т.д.)")
     @Enumerated(EnumType.STRING)
     @Column(name = "product_category")
-    protected Category productCategory;     // Категория изделия (телевизор, холодильник, пылесос и т.д.)
+    protected Category productCategory;
 
-    private String name;            // Наименование
+    @Schema(description = "Наименование")
+    private String name;
 
+    @Schema(description = "Серийный номер")
     @Column(name = "ser_num")
-    private String serialNumber;    // Серийный номер
+    private String serialNumber;
 
-    private String colour;          // Цвет
+    @Schema(description = "Цвет")
+    private String colour;
 
-    private Size size;              // Размер
+    @Schema(description = "Размер")
+    private Size size;
 
-    private BigDecimal price;       // Цена
+    @Schema(description = "Цена")
+    private BigDecimal price;
 
+    @Schema(description = "Наличие товара")
     @Column(name = "available")
-    private Boolean available;      // Наличие товара
+    private Boolean available;
 
     @Override
     public Model clone() throws CloneNotSupportedException {

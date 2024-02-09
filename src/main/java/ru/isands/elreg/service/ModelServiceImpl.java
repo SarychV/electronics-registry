@@ -7,7 +7,6 @@ import ru.isands.elreg.dto.ModelDtoCreate;
 import ru.isands.elreg.dto.ModelDtoUpdate;
 import ru.isands.elreg.exception.BadRequestException;
 import ru.isands.elreg.exception.NotFoundException;
-import ru.isands.elreg.mapper.ProductMapper;
 import ru.isands.elreg.model.Model;
 import ru.isands.elreg.model.Product;
 import ru.isands.elreg.model.Sorting;
